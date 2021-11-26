@@ -5,8 +5,10 @@ const user = new Schema({
     firstname: String,
     lastname: String,
     username: String,
+    password: String,
     title: String,
     position: String,
+    userType: String,
     image: String|null,
     email: String,
 }, {collection: 'adminUsers'});
