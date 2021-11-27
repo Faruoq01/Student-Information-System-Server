@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const config = require('./config/app');
 const db = require('./config/mongoose');
@@ -12,6 +13,7 @@ db.databaseConnection();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/ums/senate/api/', senateMiddleware());
 app.use('/ums/faculty/api/', facultyMiddleware());
 app.use('/ums/department/api/', departmentMiddleware());
