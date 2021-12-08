@@ -19,7 +19,7 @@ const register = async(req, res) => {
             'username': req.body.username,
             'password': hashedPassword,
             'title': req.body.title,
-            'userType': req.body.userType,
+            'userType': "senate",
             'position': req.body.position,
             'image': null,
             'email': req.body.email

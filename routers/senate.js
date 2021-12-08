@@ -4,6 +4,8 @@ const loginController = require('../controllers/senate/login');
 const adminControllers = require('../controllers/senate/admin');
 const adminUpdateController = require('../controllers/senate/updateAdmin');
 const deleteUserControler = require('../controllers/senate/deleteUserControler');
+const activateUserControler = require('../controllers/senate/activateUserControler');
+const searchAdminController = require('../controllers/senate/searchAdminController');
 const cors = require('cors');
 
 module.exports = function(){
@@ -14,6 +16,8 @@ module.exports = function(){
     router.get('/admin', cors(), adminControllers);
     router.post('/update', cors(), adminUpdateController);
     router.post('/delete', cors(), deleteUserControler);
+    router.post('/activate-user', cors(), activateUserControler);
+    router.post('/search-admin', cors(), searchAdminController)
 
     return router;
 }
