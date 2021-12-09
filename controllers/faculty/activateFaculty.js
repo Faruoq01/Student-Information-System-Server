@@ -1,4 +1,4 @@
-const RegisterModel = require('../../models/senate/registerModel');
+const RegisterFaculty = require('../../models/faculty/registerModel');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/app');
 
@@ -10,7 +10,7 @@ const activateFacultyControler = async(req, res) => {
         jwt.verify(token, config.appKey, function(error, done){
             if(error) if(error) return res.status(500).json({Error: 'Authentication failed'});
             if(done){
-                RegisterModel.model.findOne({email: email}, function(error, users){
+                RegisterFaculty.model.findOne({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
                     users.activeStatus = status;
 

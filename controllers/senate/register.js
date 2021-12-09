@@ -2,6 +2,7 @@ const RegisterModel = require('../../models/senate/registerModel');
 const mailAgent = require('../../HelperFunctions/sendEmail');
 const genPassword = require('generate-password');
 const bcrypt = require('bcrypt');
+const db = require('../../config/mongoose');
 
 const register = async(req, res) => {
 
@@ -12,6 +13,8 @@ const register = async(req, res) => {
     message = 'hello welcome to SIDS, your username is '+req.body.email+' and password is: '+password+'';
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+        db.useDb('senate');
 
         let saveData = new RegisterModel.model({
             'firstname': req.body.firstname,

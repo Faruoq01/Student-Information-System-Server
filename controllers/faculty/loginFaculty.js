@@ -1,4 +1,4 @@
-const RegisterModel = require('../../models/senate/registerModel');
+const RegisterFaculty = require('../../models/faculty/registerModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/app');
@@ -9,7 +9,7 @@ const loginFacultyController = async(req, res) => {
 
     try{
 
-        RegisterModel.model.findOne({email: email},
+        RegisterFaculty.model.findOne({email: email},
         function(error, user){
 
             if(error) throw error;

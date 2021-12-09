@@ -1,4 +1,4 @@
-const RegisterModel = require('../../models/senate/registerModel');
+const RegisterFaculty = require('../../models/faculty/registerModel');
 const mailAgent = require('../../HelperFunctions/sendEmail');
 const genPassword = require('generate-password');
 const bcrypt = require('bcrypt');
@@ -13,7 +13,7 @@ const registerFacultyController = async(req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-        let saveData = new RegisterModel.model({
+        let saveData = new RegisterFaculty.model({
             'faculty': req.body.faculty,
             'dean': req.body.dean,
             'username': req.body.username,
@@ -26,7 +26,7 @@ const registerFacultyController = async(req, res) => {
             'email': req.body.email
         }); 
 
-        RegisterModel.model.findOne({email: req.body.email}, 
+        RegisterFaculty.model.findOne({email: req.body.email}, 
             function(error, user){
                 if(error) throw error;
 

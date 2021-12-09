@@ -14,9 +14,11 @@ const user = new Schema({
     email: String,
 }, {collection: 'adminUsers'});
 
-const Model = mongoose.model('RegisterModel', user);
+const myDB = mongoose.connection.useDb('senate');
+
+const senate = myDB.model('RegisterModel', user);
 
 module.exports = {
-    model: Model
+    model: senate
 }
 

@@ -14,9 +14,11 @@ const user = new Schema({
     email: String,
 }, {collection: 'facultyUsers'});
 
-const Model = mongoose.model('RegisterModel', user);
+const myDB = mongoose.connection.useDb('faculty');
+
+const faculty = myDB.model('RegisterFaculty', user);
 
 module.exports = {
-    model: Model
+    model: faculty
 }
 
