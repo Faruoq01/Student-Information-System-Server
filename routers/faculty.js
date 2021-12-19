@@ -17,7 +17,7 @@ module.exports = function(){
     router.post('/update-faculty', cors(), facultyUpdateController);
     router.post('/delete-faculty', cors(), deleteFacultyControler);
     router.post('/activate-faculty', cors(), activateFacultyControler);
-    router.post('/search-faculty', cors(), searchFacultyController)
+    router.post('/search-faculty', cors(), searchFacultyController);
 
     return router;
 }

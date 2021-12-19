@@ -1,6 +1,6 @@
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterFaculty = require('../../../models/faculty/registerModel');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/app');
+const config = require('../../../config/app');
 
 const searchFacultyController = async(req, res) => {
 

@@ -1,11 +1,11 @@
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterModel = require('../../../models/senate/registerModel');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/app');
+const config = require('../../../config/app');
 
-const activateFacultyControler = async(req, res) => {
+const updateAdmin = async(req, res) => {
 
     try{
-        const {email, status} = req.body;
+        const {firstname, lastname, username, title, position, email} = req.body;
         const token = req.header('authorization').split(' ')[1];
         jwt.verify(token, config.appKey, function(error, done){
             if(error) return res.status(401).json({
@@ -15,9 +15,14 @@ const activateFacultyControler = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.findOne({email: email}, function(error, users){
+                RegisterModel.model.findOne({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
-                    users.activeStatus = status;
+
+                    users.firstname = firstname;
+                    users.lastname = lastname;
+                    users.username = username;
+                    users.title = title;
+                    users.position = position;
 
                     users.save(function(error){
                         if(!error){
@@ -42,4 +47,4 @@ const activateFacultyControler = async(req, res) => {
     }
 }
 
-module.exports = activateFacultyControler;
+module.exports = updateAdmin;

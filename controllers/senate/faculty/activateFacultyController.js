@@ -1,23 +1,23 @@
-const RegisterModel = require('../../models/senate/registerModel');
+const RegisterFaculty = require('../../../models/faculty/registerModel');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/app');
+const config = require('../../../config/app');
 
-const updateAdmin = async(req, res) => {
+const activateFacultyControler = async(req, res) => {
 
     try{
-        const {firstname, lastname, username, title, position, email} = req.body;
+        const {email, status} = req.body;
         const token = req.header('authorization').split(' ')[1];
         jwt.verify(token, config.appKey, function(error, done){
-            if(error) if(error) return res.status(500).json({Error: 'Authentication failed'});
+            if(error) return res.status(401).json({
+                error:{ 
+                    name:'TokenExpiredError', 
+                    message:'Authentication failed'
+                }
+            });
             if(done){
-                RegisterModel.model.findOne({email: email}, function(error, users){
+                RegisterFaculty.model.findOne({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
-
-                    users.firstname = firstname;
-                    users.lastname = lastname;
-                    users.username = username;
-                    users.title = title;
-                    users.position = position;
+                    users.activeStatus = status;
 
                     users.save(function(error){
                         if(!error){
@@ -42,4 +42,4 @@ const updateAdmin = async(req, res) => {
     }
 }
 
-module.exports = updateAdmin;
+module.exports = activateFacultyControler;

@@ -9,7 +9,12 @@ const deleteFacultyControler = async(req, res) => {
         const {email} = req.body;
         const token = req.header('authorization').split(' ')[1];
         jwt.verify(token, config.appKey, function(error, done){
-            if(error) if(error) return res.status(500).json({Error: 'Authentication failed'});
+            if(error) return res.status(401).json({
+                error:{ 
+                    name:'TokenExpiredError', 
+                    message:'Authentication failed'
+                }
+            });
             if(done){
                 RegisterFaculty.model.remove({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});

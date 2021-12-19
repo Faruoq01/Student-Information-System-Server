@@ -1,8 +1,8 @@
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterFaculty = require('../../../models/faculty/registerModel');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/app');
+const config = require('../../../config/app');
 
-const searchFacultyController = async(req, res) => {
+const deleteFacultyControler = async(req, res) => {
 
     try{
         const {email} = req.body;
@@ -15,14 +15,14 @@ const searchFacultyController = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.findOne({email: email}, function(error, user){
+                RegisterFaculty.model.findOneAndRemove({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
-
+                    
                     res.status(200).json({
-                        'code': 200,
-                        'status': 'success',
-                        'admin': user
-                    });
+                        code: 200,
+                        message: 'success',
+                        email: users.email
+                    })
                 });
             }
         });
@@ -31,4 +31,4 @@ const searchFacultyController = async(req, res) => {
     }
 }
 
-module.exports = searchFacultyController;
+module.exports = deleteFacultyControler;
