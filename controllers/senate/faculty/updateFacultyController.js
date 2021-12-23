@@ -15,7 +15,11 @@ const facultyUpdateController = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.findOne({email: email}, function(error, users){
+                RegisterFaculty.model.findOne({$or:[
+                    {email:email},
+                    {faculty: faculty},
+                    {username: username}
+                ]}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
 
                     users.faculty = faculty;

@@ -17,11 +17,10 @@ const deleteFacultyControler = async(req, res) => {
             if(done){
                 RegisterFaculty.model.findOneAndRemove({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
-                    
                     res.status(200).json({
                         code: 200,
                         message: 'success',
-                        email: users.email
+                        user: users
                     })
                 });
             }

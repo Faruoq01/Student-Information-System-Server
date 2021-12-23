@@ -28,6 +28,8 @@ const registerFacultyController = async(req, res) => {
         'email': req.body.email
     }); 
 
+    let {email, username, faculty} = req.body;
+
     const token = req.header('authorization').split(' ')[1];
     jwt.verify(token, config.appKey, function(error, done){
         if(error) return res.status(401).json({
@@ -37,20 +39,22 @@ const registerFacultyController = async(req, res) => {
             }
         });
         if(done){
-            RegisterFaculty.model.findOne({email: req.body.email}, 
+            RegisterFaculty.model.findOne({$or:[
+                {email:email},
+                {faculty: faculty},
+                {username: username}
+            ]}, 
             function(error, user){
                 if(error) throw error;
-    
-                if(user){
+                if(user!==null){
                     res.status(200).json({
                         'code': 200,
                         'status': 'success', 
                         'message': 'user already exist'
-                    })
-                }else {
+                    });
+                }else{
                     saveData.save(function(error, result){
                         if(error) throw error;
-                
                         if(result){
                             res.status(200).json({
                                 'status':200, 
@@ -59,9 +63,8 @@ const registerFacultyController = async(req, res) => {
                             });
                             mailAgent(req.body.email, message);
                         }
-                    })
+                    });
                 }
-                    
             })
         }
     })   

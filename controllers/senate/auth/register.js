@@ -26,10 +26,12 @@ const register = async(req, res) => {
             'email': req.body.email
         }); 
 
-        RegisterModel.model.findOne({email: req.body.email}, 
+        RegisterModel.model.findOne({$or:[
+            {username:req.body.username},
+            {email:req.body.email}
+        ]}, 
             function(error, user){
                 if(error) throw error;
-
                 if(user){
                     res.status(200).json({
                         'code': 200,

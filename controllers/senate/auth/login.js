@@ -5,11 +5,11 @@ const config = require('../../../config/app');
 
 const login = async(req, res) => {
 
-    const {email, password} = req.body;
+    const {username, password} = req.body;
 
     try{
 
-        RegisterModel.model.findOne({email: email},
+        RegisterModel.model.findOne({username: username},
         function(error, user){
 
             if(error) throw error;
