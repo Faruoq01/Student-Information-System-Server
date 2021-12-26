@@ -9,11 +9,13 @@ const facultyMiddleware = require('./routers/faculty');
 const departmentMiddleware = require('./routers/department');
 const lecturerMiddleware = require('./routers/lecturer');
 const studentMiddleware = require('./routers/student');
+const authMiddleware = require('./routers/auth');
 db.databaseConnection();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/ums/auth/api/', authMiddleware());
 app.use('/ums/senate/api/', senateMiddleware());
 app.use('/ums/faculty/api/', facultyMiddleware());
 app.use('/ums/department/api/', departmentMiddleware());

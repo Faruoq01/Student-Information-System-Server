@@ -11,7 +11,7 @@ const activateFacultyControler = async(req, res) => {
             if(error) return res.status(401).json({
                 error:{ 
                     name:'TokenExpiredError', 
-                    message:'Authentication failed'
+                    message:'Authentication failed',
                 }
             });
             if(done){

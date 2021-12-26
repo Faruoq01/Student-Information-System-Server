@@ -1,7 +1,6 @@
 const RegisterFaculty = require('../../models/faculty/registerModel');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/app');
-const { response } = require('express');
 
 const deleteFacultyControler = async(req, res) => {
 
@@ -16,13 +15,12 @@ const deleteFacultyControler = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.remove({email: email}, function(error, users){
+                RegisterFaculty.model.findOneAndRemove({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
-                    
                     res.status(200).json({
                         code: 200,
                         message: 'success',
-                        email: email
+                        user: users
                     })
                 });
             }

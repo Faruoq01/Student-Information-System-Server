@@ -5,7 +5,7 @@ const config = require('../../config/app');
 const facultyUpdateController = async(req, res) => {
 
     try{
-        const {faculty, dean, username, title, position, email} = req.body;
+        const {faculty, dean, title, position, email} = req.body;
         const token = req.header('authorization').split(' ')[1];
         jwt.verify(token, config.appKey, function(error, done){
             if(error) return res.status(401).json({
@@ -20,9 +20,9 @@ const facultyUpdateController = async(req, res) => {
 
                     users.faculty = faculty;
                     users.dean = dean;
-                    users.username = username;
                     users.title = title;
                     users.position = position;
+                    users.email = email;
 
                     users.save(function(error){
                         if(!error){
