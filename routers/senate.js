@@ -5,6 +5,7 @@ const adminUpdateController = require('../controllers/senate/admin/updateAdmin')
 const deleteUserControler = require('../controllers/senate/admin/deleteUserControler');
 const activateUserControler = require('../controllers/senate/admin/activateUserControler');
 const searchAdminController = require('../controllers/senate/admin/searchAdminController');
+const registerController = require('../controllers/Auth/Register');
 
 // senate faculty imports
 const adminFacultyControllers = require('../controllers/senate/faculty/adminFacultyController');
@@ -23,6 +24,7 @@ module.exports = function(){
     router.post('/delete', cors(), deleteUserControler);
     router.post('/activate-user', cors(), activateUserControler);
     router.post('/search-admin', cors(), searchAdminController);
+    router.post('/register', cors(), registerController);
 
     // faculty routes
     router.get('/admin-faculty', cors(), adminFacultyControllers);

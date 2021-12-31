@@ -1,4 +1,4 @@
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterFacultyUsers = require('../../models/faculty/facultyUserModel');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/app');
 
@@ -15,7 +15,7 @@ const activateFacultyControler = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.findOne({email: email}, function(error, users){
+                RegisterFacultyUsers.model.findOne({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
                     users.activeStatus = status;
 
@@ -30,7 +30,6 @@ const activateFacultyControler = async(req, res) => {
                             res.status(500).json({
                                 'code': 500,
                                 'status': 'update failed',
-                                'admin': users
                             })
                         }
                     })

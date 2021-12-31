@@ -17,16 +17,15 @@ const updateAdmin = async(req, res) => {
             if(done){
                 RegisterModel.model.findOne({$or:[
                     {email:email},
-                    {faculty: faculty},
                     {username: username}
                 ]}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
 
                     users.firstname = firstname;
                     users.lastname = lastname;
-                    users.username = username;
                     users.title = title;
                     users.position = position;
+                    users.email = email
 
                     users.save(function(error){
                         if(!error){

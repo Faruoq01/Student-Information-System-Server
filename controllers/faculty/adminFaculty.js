@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterFacultyUsers = require('../../models/faculty/facultyUserModel');
 const config = require('../../config/app');
 
 const adminFacultyControllers = async(req, res) => {
@@ -12,7 +12,7 @@ const adminFacultyControllers = async(req, res) => {
             }
         });
         if(done){
-            RegisterFaculty.model.find(function(error, users){
+            RegisterFacultyUsers.model.find(function(error, users){
                 if(error) return res.status(500).json({Error: 'Serve error'});
                 res.status(200).json({
                     'code': 200,

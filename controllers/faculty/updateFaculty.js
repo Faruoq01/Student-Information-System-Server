@@ -1,11 +1,11 @@
-const RegisterFaculty = require('../../models/faculty/registerModel');
+const RegisterFacultyUsers = require('../../models/faculty/facultyUserModel');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/app');
 
 const facultyUpdateController = async(req, res) => {
 
     try{
-        const {faculty, dean, title, position, email} = req.body;
+        const {firstname, lastname, title, position, email} = req.body;
         const token = req.header('authorization').split(' ')[1];
         jwt.verify(token, config.appKey, function(error, done){
             if(error) return res.status(401).json({
@@ -15,11 +15,11 @@ const facultyUpdateController = async(req, res) => {
                 }
             });
             if(done){
-                RegisterFaculty.model.findOne({email: email}, function(error, users){
+                RegisterFacultyUsers.model.findOne({email: email}, function(error, users){
                     if(error) return res.status(500).json({Error: 'Serve error'});
 
-                    users.faculty = faculty;
-                    users.dean = dean;
+                    users.firstname = firstname;
+                    users.lastname = lastname;
                     users.title = title;
                     users.position = position;
                     users.email = email;
